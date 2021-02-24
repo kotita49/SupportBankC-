@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.IO;
-using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.VisualBasic.FileIO;
 
 namespace SupportBank
 {
@@ -17,119 +17,132 @@ namespace SupportBank
             {
                 // Create a file to write to.
                 string[] createText = { "Hello", "And", "Welcome" };
-                File.WriteAllLines(path, createText);
+                File.WriteAllLines (path, createText);
             }
 
-            List<decimal>Amountowed = new List<decimal>();
+           Console.WriteLine("What account do you want?");
+            string PersonName = Console.ReadLine();
 
-            var TransactionDictionary = new Dictionary<string, List<SingleTransaction>>();
-
-           
             // Open the file to read from.
-             var readText = File.ReadAllLines(path).Skip(1);
+            var transactions = ReadCSV(path);
+            var accountlist = new List<Account>();
+            foreach (var transaction in transactions)
+            {
+                var accountMatchingName =
+                    accountlist
+                        .Where(x => x.Name == transaction.FromName)
+                        .ToList();
+                if (accountMatchingName.Count > 0)
+                {
+                    var account = accountMatchingName[0];
+                    account.IncomingTransactions.Add (transaction);
+                }
+                else
+                {
+                    accountlist
+                        .Add(new Account {
+                            Name = transaction.FromName,
+                            IncomingTransactions =
+                                new List<Transaction> { transaction },
+                            OutgoingTransactions = new List<Transaction>()
+                        });
+                }
+
+                var accountMatchingName2 =
+                    accountlist
+                        .Where(x => x.Name == transaction.ToName)
+                        .ToList();
+                if (accountMatchingName2.Count > 0)
+                {
+                    var account = accountMatchingName2[0];
+                    account.OutgoingTransactions.Add (transaction);
+                }
+                else
+                {
+                    accountlist
+                        .Add(new Account {
+                            Name = transaction.ToName,
+                            IncomingTransactions = new List<Transaction>(),
+                            OutgoingTransactions =
+                                new List<Transaction> { transaction }
+                        });
+                }
+            }
+            foreach (var account in accountlist)
+            {
+                if (account.Name == PersonName)
+                {
+                    foreach (var transaction in account.IncomingTransactions)
+                    {
+                        Console
+                            .WriteLine(PersonName +
+                            " lent: " +
+                            transaction.Amount +
+                            "to " +
+                            transaction.ToName +
+                            " on " +
+                            transaction.Date +
+                            " for " +
+                            transaction.Narrative);
+                    }
+                    foreach (var transaction in account.OutgoingTransactions)
+                    {
+                        Console
+                            .WriteLine(PersonName +
+                            " borrowed: " +
+                            transaction.Amount +
+                            "to " +
+                            transaction.FromName +
+                            " on " +
+                            transaction.Date +
+                            " for " +
+                            transaction.Narrative);
+                    }
+                }
+            }
+
+            // foreach(var account in accountlist){
+            //     if(account.Name == PersonName){
+            //        }
+            // }
+            foreach (var account in accountlist)
+            {
+                decimal MoneyReceived = 0;
+                decimal MoneySpent = 0;
+
+                foreach (var transaction in account.IncomingTransactions)
+                {
+                    MoneyReceived += transaction.Amount;
+                }
+
+                foreach (var transaction in account.OutgoingTransactions)
+                {
+                    MoneySpent += transaction.Amount;
+                }
+                decimal balance = MoneyReceived - MoneySpent;
+                Console.WriteLine(account.Name + " has balance: " + balance);
+            }
+        }
+
+        public static List<Transaction> ReadCSV(string path)
+        {
+            var allTransactions = new List<Transaction>();
+            var readText = File.ReadAllLines(path).Skip(1);
             foreach (string line in readText)
             {
-                
                 var values = line.Split(',');
 
-            //    foreach(string el in values){
-            //        Console.WriteLine(el);
-            //    }
-            var PersonName = values[1];
-
-                var Transaction = new SingleTransaction{
-                 FromName =PersonName,
-                 ToName =values[2],
-                 Narrative=values[3],
-                 Amount = Convert.ToDecimal(values[4]),
-                 Date = DateTime.Parse(values[0])
-                };
-               
-            //    if(Transaction.FromName == "Jon A"){
-            //        Amountowed.Add(Transaction.Amount);
-            //    }
-List<SingleTransaction>OldTransactions;
-               if (TransactionDictionary.TryGetValue(PersonName, out OldTransactions))
-        {
-            OldTransactions.Add(Transaction);
-            TransactionDictionary[PersonName] = OldTransactions;
-        } else {
-            List<SingleTransaction> TransactionList = new List<SingleTransaction>();
-            TransactionList.Add(Transaction);
-            TransactionDictionary.Add(PersonName,TransactionList );
-        }  
-    }
-
-foreach (KeyValuePair<string, List<SingleTransaction>> pair in TransactionDictionary)
-        {
-            Console.WriteLine(pair.Key);
-            decimal sumAmount = 0;
-            foreach(SingleTransaction Trans in pair.Value){
-                    sumAmount = sumAmount + Trans.Amount;
-                    Console.WriteLine(Trans.Date + " " + Trans.ToName + " " + Trans.Narrative + " " + Trans.Amount);
+                var transaction =
+                    new Transaction {
+                        FromName = values[1],
+                        ToName = values[2],
+                        Narrative = values[3],
+                        Amount = Convert.ToDecimal(values[4]),
+                        Date = DateTime.Parse(values[0])
+                    };
+                allTransactions.Add (transaction);
             }
-            Console.WriteLine(sumAmount);
+            return allTransactions;
         }
-
-
-
-
-        Console.WriteLine("What account do you want?");
-        string AccountName = Console.ReadLine();
-
-        List<SingleTransaction>Transactions;
-               if (TransactionDictionary.TryGetValue(AccountName, out Transactions))
-        {
-           foreach(SingleTransaction Trans in Transactions){
-                    Console.WriteLine(Trans.Date + " " + Trans.ToName + " " + Trans.Narrative + " " + Trans.Amount);
-            }
-        } else {
-            Console.WriteLine("Unknown prson name: " + AccountName);
-        }  
-
-    //  decimal sumAmount = 0;
-    //         foreach(SingleTransaction Trans in TransactionDictionary["Jon A"]){
-    //                 sumAmount = sumAmount + Trans.Amount;
-    //         }
-    //         Console.WriteLine(sumAmount);
-
     }
-    }
-    
-
-    public class SingleTransaction
-    {
-        public string FromName { get ; set; }
-         public string ToName { get ; set; }
-        public string Narrative {get ; set;}
-        public decimal Amount {get;set;}
-        public DateTime Date{get;set;}
-   
-   
-    }
-
-    public class SinglePersonListAccount
-    {
-      
-
-
-    //   public string Narrative {get ; set;}
-    //   public decimal AmountHeOwes{get ; set;}
-    //   public DateTime Date{get;set;}
-    //   public decimal AmountOwed{get ; set;}
-
-      public void TotalAmountOwed(List<decimal> Amountowed){
-
-         foreach(decimal i in Amountowed){
-            Console.WriteLine(i.ToString());
-             }
-              decimal Totalowed =Amountowed.Sum();
-             Console.WriteLine(Totalowed);
-        }
-
-
-          }
-
-
 }
-
