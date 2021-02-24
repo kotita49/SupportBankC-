@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\tatrut\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\tatrut\\.nuget\\packages"
+    ]
+  }
+}
