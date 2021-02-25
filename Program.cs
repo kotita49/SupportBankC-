@@ -172,7 +172,7 @@ var date = DateTime.Parse(values[0]);
 }
 catch(System.Exception e)
 {
-    Console.WriteLine("Invalid date in the file "+path);
+    Console.WriteLine("Invalid date in the file "+path + "on line " + (Array.IndexOf(readText, line)+2));
     Logger.Info(e+ "Invalid date entered by user");
     continue;
 }
@@ -183,7 +183,7 @@ try
 }
 catch(System.Exception e)
 {
-Console.WriteLine("Invalid amount entered in file "+path);
+Console.WriteLine("Invalid amount entered in file on line "+(Array.IndexOf(readText, line)+2) +path);
 Logger.Info(e + "invalid amount format");
 continue;
 }

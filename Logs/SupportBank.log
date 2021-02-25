@@ -38,3 +38,43 @@
    at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
 2021-02-25 12:05:26.1485 Info - SupportBank.Program: User entered an invalid name
 2021-02-25 12:05:26.1485 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:14:52.4153 Info - SupportBank.Program: The program has started
+2021-02-25 12:14:52.5029 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 182invalid amount format
+2021-02-25 12:14:52.5029 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
+2021-02-25 12:17:05.6326 Info - SupportBank.Program: The program has started
+2021-02-25 12:17:05.7395 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 182invalid amount format
+2021-02-25 12:17:05.7425 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
+2021-02-25 12:17:37.1592 Info - SupportBank.Program: The program has started
+2021-02-25 12:17:37.3210 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 182invalid amount format
+2021-02-25 12:17:37.3438 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
+2021-02-25 12:18:40.1602 Info - SupportBank.Program: The program has started
+2021-02-25 12:18:40.2915 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 182invalid amount format
+2021-02-25 12:18:40.2915 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
