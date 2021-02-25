@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bQLEysT4GJlFO9WkE978yHcKKnDOT0+a2QceSHaEdo8BdTjQC/v3MsSnYPGrmHcm2odU2U/L0ePJGIILbqEfVQ==",
+  "dgSpecHash": "1H7qVkjxFQo8DgowShyXAuucPF9l0iiWgQiLIm8OEkF1DVZtuzWYw5j4YCOPmf4OtkKzFqsKW3XrsfeeOZEDug==",
   "success": true,
   "projectFilePath": "C:\\Training\\SupportBank\\SupportBank.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\tatrut\\.nuget\\packages\\nlog\\4.7.7\\nlog.4.7.7.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,0 +1,40 @@
+2021-02-25 10:24:15.0575 Info - SupportBank.Program: The program has started
+2021-02-25 11:46:22.1032 Info - SupportBank.Program: The program has started
+2021-02-25 11:49:22.5883 Info - SupportBank.Program: The program has started
+2021-02-25 11:49:57.1415 Info - SupportBank.Program: The program has started
+2021-02-25 12:00:07.3767 Info - SupportBank.Program: The program has started
+2021-02-25 12:00:07.4650 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 180invalid amount format
+2021-02-25 12:00:07.4693 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 169Invalid date entered by user
+2021-02-25 12:00:13.8629 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:00:13.8629 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:00:13.8629 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:03:48.6998 Info - SupportBank.Program: The program has started
+2021-02-25 12:03:48.7969 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 180invalid amount format
+2021-02-25 12:03:48.7988 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 169Invalid date entered by user
+2021-02-25 12:03:53.9960 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:05:03.7124 Info - SupportBank.Program: The program has started
+2021-02-25 12:05:03.8108 Info - SupportBank.Program: System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseDecimal(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToDecimal(String value)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 182invalid amount format
+2021-02-25 12:05:03.8108 Info - SupportBank.Program: System.FormatException: The string 'Last Thursday' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at System.DateTimeParse.Parse(ReadOnlySpan`1 s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.DateTime.Parse(String s)
+   at SupportBank.Program.ReadCSV(String path) in C:\Training\SupportBank\Program.cs:line 171Invalid date entered by user
+2021-02-25 12:05:26.1485 Info - SupportBank.Program: User entered an invalid name
+2021-02-25 12:05:26.1485 Info - SupportBank.Program: User entered an invalid name
