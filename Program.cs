@@ -27,16 +27,17 @@ namespace SupportBank
                 .LoggingRules
                 .Add(new LoggingRule("*", LogLevel.Debug, target));
             LogManager.Configuration = config;
+            
             Logger.Info("The program has started");
-           // string path = @"C:\Training\SupportBank\DodgyTransactions2015.csv";
-            string path1 = @"C:\Training\SupportBank\Transactions2013.json";
+           string path = @"C:\Training\SupportBank\DodgyTransactions2015.csv";
+            //string path1 = @"C:\Training\SupportBank\Transactions2013.json";
 
             // This text is added only once to the file.
-            if (!File.Exists(path1))
+            if (!File.Exists(path))
             {
-                Logger.Fatal("could not find file at " + path1);
+                Logger.Fatal("could not find file at " + path);
             }
-            var transactions = ReadJson(path1);
+            var transactions = ReaderChoice(path);
             var accountlist = new List<Account>();
 
             string PersonName = "";
@@ -219,6 +220,15 @@ var jsonstring = File.ReadAllText(path1);
 var allTransactions = JsonConvert.DeserializeObject<List<Transaction>>(jsonstring);
 
  return allTransactions;
+        }
+        public static List<Transaction>ReaderChoice(string path){
+            if(path.Contains("csv")){
+                Console.WriteLine("Reading CSV");
+                return ReadCSV(path);
+            }else {
+                Console.WriteLine("Reading JSON");
+return ReadJson(path);
+            }
         }
     }
 }
