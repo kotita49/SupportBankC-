@@ -5,6 +5,7 @@ using System.Linq;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using Newtonsoft.Json;
 
 namespace SupportBank
 {
@@ -27,24 +28,20 @@ namespace SupportBank
                 .Add(new LoggingRule("*", LogLevel.Debug, target));
             LogManager.Configuration = config;
             Logger.Info("The program has started");
-            string path = @"C:\Training\SupportBank\DodgyTransactions2015.csv";
+           // string path = @"C:\Training\SupportBank\DodgyTransactions2015.csv";
+            string path1 = @"C:\Training\SupportBank\Transactions2013.json";
 
             // This text is added only once to the file.
-            if (!File.Exists(path))
+            if (!File.Exists(path1))
             {
-                Logger.Fatal("could not find file at "+ path);
+                Logger.Fatal("could not find file at " + path1);
             }
-var transactions = ReadCSV(path);
+            var transactions = ReadJson(path1);
             var accountlist = new List<Account>();
-           
-string PersonName = "";
-            while(String.IsNullOrEmpty(PersonName))
-            {
-                Console.WriteLine("What account do you want?");
-            var userInput = Console.ReadLine();
-            
+
+            string PersonName = "";
+
             // Open the file to read from.
-            
             foreach (var transaction in transactions)
             {
                 var accountMatchingName =
@@ -66,17 +63,7 @@ string PersonName = "";
                             OutgoingTransactions = new List<Transaction>()
                         });
                 }
-
-                if(accountlist.Exists(x => x.Name==userInput)){
-                       
-                      PersonName = userInput;
-            }
-            else
-            {
-              Console.WriteLine("Invalid name - please try a different name");
-             Logger.Info("User entered an invalid name");
-                       }
-
+                
                 var accountMatchingName2 =
                     accountlist
                         .Where(x => x.Name == transaction.ToName)
@@ -97,7 +84,23 @@ string PersonName = "";
                         });
                 }
             }
-            }
+            while (String.IsNullOrEmpty(PersonName))
+                {
+                    Console.WriteLine("What account do you want?");
+                    var userInput = Console.ReadLine();
+                
+                if (accountlist.Exists(x => x.Name == userInput))
+                {
+                    PersonName = userInput;
+                }
+                else
+                {
+                    Console
+                        .WriteLine("Invalid name - please try a different name");
+                    Logger.Info("User entered an invalid name");
+                }
+                }
+
             foreach (var account in accountlist)
             {
                 if (account.Name == PersonName)
@@ -131,7 +134,7 @@ string PersonName = "";
                 }
             }
 
-                   foreach (var account in accountlist)
+            foreach (var account in accountlist)
             {
                 decimal MoneyReceived = 0;
                 decimal MoneySpent = 0;
@@ -154,39 +157,47 @@ string PersonName = "";
         {
             var allTransactions = new List<Transaction>();
             string[] readText = null;
-            try{
-
-            readText = File.ReadAllLines(path).Skip(1).ToArray();
+            try
+            {
+                readText = File.ReadAllLines(path).Skip(1).ToArray();
             }
             catch (FileNotFoundException e)
             {
-Logger.Info(e +"Invalid file path: " + path);
+                Logger.Error(e + "Invalid file path: " + path);
             }
 
             foreach (string line in readText)
             {
                 var values = line.Split(',');
 
-try{
-var date = DateTime.Parse(values[0]);
-}
-catch(System.Exception e)
-{
-    Console.WriteLine("Invalid date in the file "+path + "on line " + (Array.IndexOf(readText, line)+2));
-    Logger.Info(e+ "Invalid date entered by user");
-    continue;
-}
+                try
+                {
+                    var date = DateTime.Parse(values[0]);
+                }
+                catch (System.Exception e)
+                {
+                    Console
+                        .WriteLine("Invalid date in the file " +
+                        path +
+                        "on line " +
+                        (Array.IndexOf(readText, line) + 2));
+                    Logger.Error(e + "Invalid date entered by user");
+                    continue;
+                }
 
-try 
-{
-    var amount = Convert.ToDecimal(values[4]);
-}
-catch(System.Exception e)
-{
-Console.WriteLine("Invalid amount entered in file on line "+(Array.IndexOf(readText, line)+2) +path);
-Logger.Info(e + "invalid amount format");
-continue;
-}
+                try
+                {
+                    var amount = Convert.ToDecimal(values[4]);
+                }
+                catch (System.Exception e)
+                {
+                    Console
+                        .WriteLine("Invalid amount entered in file on line " +
+                        (Array.IndexOf(readText, line) + 2) +
+                        path);
+                    Logger.Info(e + "invalid amount format");
+                    continue;
+                }
 
                 //yield return
                 var transaction =
@@ -194,14 +205,20 @@ continue;
                         FromName = values[1],
                         ToName = values[2],
                         Narrative = values[3],
-                        Amount = Convert.ToDecimal(values[4]),                      
- Date = DateTime.Parse(values[0])
-                                               
+                        Amount = Convert.ToDecimal(values[4]),
+                        Date = DateTime.Parse(values[0])
                     };
-           
+
                 allTransactions.Add (transaction);
             }
             return allTransactions;
+        }
+
+        public static List<Transaction> ReadJson(string path1){
+var jsonstring = File.ReadAllText(path1);
+var allTransactions = JsonConvert.DeserializeObject<List<Transaction>>(jsonstring);
+
+ return allTransactions;
         }
     }
 }

@@ -16,3 +16,5 @@ C:\Training\SupportBank\obj\Debug\net5.0\SupportBank.pdb
 C:\Training\SupportBank\obj\Debug\net5.0\SupportBank.genruntimeconfig.cache
 C:\Training\SupportBank\bin\Debug\net5.0\NLog.dll
 C:\Training\SupportBank\obj\Debug\net5.0\SupportBank.csproj.CopyComplete
+C:\Training\SupportBank\bin\Debug\net5.0\Json.Net.dll
+C:\Training\SupportBank\bin\Debug\net5.0\Newtonsoft.Json.dll
